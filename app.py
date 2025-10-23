@@ -112,7 +112,7 @@ def get_info(token, uid):
     return response
 
 # --- Flask Endpoint ---
-@app.route('/get_info', methods=['GET'])
+@app.route('/api/region', methods=['GET'])
 def api_get_info():
     try:
         uid = request.args.get("uid", type=int)
