@@ -125,16 +125,20 @@ def api_get_info():
 
         # Get encrypted protobuf response
         response = get_info(token, uid)
-        result = get_available_room(response.content.hex())
-        parsed_data = json.loads(result)
-
-        return jsonify({
-            "player_info": {
-                "name": parsed_data["3"]["data"],
-                "region": parsed_data["5"]["data"],
-                "level": parsed_data["6"]["data"]
-            }
-        })
+        if response.status_code == 200:
+            result = get_available_room(response.content.hex())
+            parsed_data = json.loads(result)
+            return jsonify({
+                "player_info": {
+                    "name": parsed_data["3"]["data"],
+                    "region": parsed_data["5"]["data"],
+                    "level": parsed_data["6"]["data"]
+                }
+            })
+        else:
+            return jsonify({
+                "error": f"Failed to fetch player info for UID {uid}. Please check UID and try again."
+            }), response.status_code
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
