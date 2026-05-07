@@ -100,7 +100,7 @@ def get_info(token, uid):
         "Content-Type": "application/octet-stream",
         "Expect": "100-continue",
         "Authorization": f"Bearer {token}",
-        "X-Unity-Version": "2018.4.11f1",
+        "X-Unity-Version": "2022.3.47f1",
         "X-GA": "v1 1",
         "ReleaseVersion": RELEASEVERSION
     }
